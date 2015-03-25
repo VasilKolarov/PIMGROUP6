@@ -1,6 +1,9 @@
 # PIMGROUP6
 Personal Information Manager
 
+##How the **** do I use github
+watch this [video]https://www.youtube.com/watch?v=oFYyTZwMyAg
+
 ##Tips for contributing
 - Commit early and often
 - Don't panic
