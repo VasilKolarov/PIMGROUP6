@@ -7,37 +7,35 @@ public class PersonalInformationManagerGUI {
 	final static String CALENDARTAB = "Calendar";
 	final static String CONTACTSTAB = "Contacts";
 	final static String UNIVERSITYRESOURCESTAB = "University Resources";
-	final static int extraWindowWidth = 100;
+	final static String NOTESTAB = "Notes";
 
 	public void addComponentToPane(Container pane) {
 		JTabbedPane tabbedPane = new JTabbedPane();
 
-		//Create the 'card'
-		JPanel calendarTab = new JPanel() {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = -9007967712825519698L;
+		//Create the calendar tab
+		JPanel calendarTab = new JPanel();
+		calendarTab.add(new JButton("Add an appointment"));
 
-			//Make the panel wider than it really needs, so
-			//the window's wide enough for the tabs to stay
-			//in one row.
-			public Dimension getPreferredSize() {
-				Dimension size = super.getPreferredSize();
-				size.width += extraWindowWidth;
-				return size;
-			}
-		};
-		calendarTab.add(new JButton("Make it rain $$$"));
-
+		//Create the contacts tab
 		JPanel contactsTab = new JPanel();
 		contactsTab.add(new JTextField("TextField", 20));
+		contactsTab.add(new JButton("Add a contact"));
 
-		JPanel univeristyResourcesTab = new JPanel();
+		//Create the university resources tab
+		JPanel universityResourcesTab = new JPanel();
+		universityResourcesTab.add(new JButton("View campus map"));
+		universityResourcesTab.add(new JButton("View Univeristy website"));
+		universityResourcesTab.add(new JButton("View University news"));
 
+		//Create the university resources tab
+		JPanel notesTab = new JPanel();
+		notesTab.add(new JButton("Add a note"));
+
+		
 		tabbedPane.addTab(CALENDARTAB, calendarTab);
 		tabbedPane.addTab(CONTACTSTAB, contactsTab);
-		tabbedPane.addTab(UNIVERSITYRESOURCESTAB, univeristyResourcesTab);
+		tabbedPane.addTab(UNIVERSITYRESOURCESTAB, universityResourcesTab);
+		tabbedPane.addTab(NOTESTAB, notesTab);
 
 		pane.add(tabbedPane, BorderLayout.CENTER);
 	}
@@ -50,6 +48,10 @@ public class PersonalInformationManagerGUI {
 	private static void createAndShowGUI() {
 		//Create and set up the window.
 		JFrame frame = new JFrame("PerosnalInformationManager");
+
+		//Set the dimensions of the window
+		//TODO: add the ability to scale the window based on screen size
+		frame.setPreferredSize(new Dimension(1000, 300));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		//Create and set up the content pane.
@@ -65,8 +67,8 @@ public class PersonalInformationManagerGUI {
 		/* Use an appropriate Look and Feel */
 		try {
 			// Uncomment depending on operating system, Linux people use GTK
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
 			//UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
 		} catch (UnsupportedLookAndFeelException ex) {
 			ex.printStackTrace();
 		} catch (IllegalAccessException ex) {
