@@ -2,13 +2,14 @@ import java.awt.*;
 
 import javax.swing.*;
 
-public class PersonalInformationManagerGUI {
-
+public class PersonalInformationManagerGUI extends QuoteOfTheDay {
+	
+	
 	final static String CALENDARTAB = "Calendar";
 	final static String CONTACTSTAB = "Contacts";
 	final static String UNIVERSITYRESOURCESTAB = "University Resources";
 	final static String NOTESTAB = "Notes";
-
+	
 	/**
 	 * Create various components and add them to the main window pane
 	 */
@@ -52,6 +53,10 @@ public class PersonalInformationManagerGUI {
 		//Create and set up the window.
 		JFrame frame = new JFrame("PerosnalInformationManager");
 
+		// Get the quote of the day and make it appear in pop up window dialog
+		QuoteOfTheDay quoteOfTheDay = new QuoteOfTheDay();
+		JOptionPane.showMessageDialog(frame, quoteOfTheDay.getQuoteOfTheDay() + ' ' + quoteOfTheDay.getAuthor());
+			
 		//Set the dimensions of the window
 		//TODO: add the ability to scale the window based on screen size
 		frame.setPreferredSize(new Dimension(1000, 500));

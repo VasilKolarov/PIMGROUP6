@@ -1,30 +1,42 @@
 import java.io.IOException;
 
-// Using Jsoup library to scrape the web-pages for HTML
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+/**
+ * Provides methods to fetch the quote of the day from the Internet including 
+ * the quote and author name, scrapes content from the web using the Jsoup 
+ * library
+ * @author	Jack Evans
+ */
 public class QuoteOfTheDay {
 	
-	// Initialise some public variables
-	public static String quoteOfTheDay;
-	public static String author;
+	// Initialise some variables
+	public static String url = "http://www.eduro.com/";
+	public static Document document;
 	
-	public static void main (String args[]) throws IOException {
-        String url = "http://www.eduro.com/";
-        // Had to use a  userAgent otherwise jsoup would return errors
-        Document document = Jsoup.connect(url).userAgent("Mozilla").get();
-        // Parse the quote of the day along with the author
-        quoteOfTheDay = document.select(".article dailyquote p").get(0).text();
-        author = document.select(".article dailyquote p").get(1).text();    
-	}
-	
+	/**
+	 * @return The Quote of the Day
+	 */
 	public String getQuoteOfTheDay() {
-		return quoteOfTheDay;
+		try {
+			document = Jsoup.connect(url).userAgent("Mozilla").get();			
+		} catch (IOException e) {
+			e.printStackTrace(); 
+		}
+		return document.select(".article dailyquote p").get(0).text();
 	}
 	
+	/**
+	 * @return The Author of todays quote
+	 */
 	public String getAuthor() {
-		return author;
+		try {
+			document = Jsoup.connect(url).userAgent("Mozilla").get();			
+		} catch (IOException e) {
+			e.printStackTrace(); 
+		}
+        return document.select(".article dailyquote p").get(1).text();
 	}
 }
 
