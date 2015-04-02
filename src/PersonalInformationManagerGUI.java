@@ -9,6 +9,9 @@ public class PersonalInformationManagerGUI {
 	final static String UNIVERSITYRESOURCESTAB = "University Resources";
 	final static String NOTESTAB = "Notes";
 
+	/**
+	 * Create various components and add them to the main window pane
+	 */
 	public void addComponentToPane(Container pane) {
 		JTabbedPane tabbedPane = new JTabbedPane();
 
@@ -18,7 +21,7 @@ public class PersonalInformationManagerGUI {
 
 		//Create the contacts tab
 		JPanel contactsTab = new JPanel();
-		contactsTab.add(new JTextField("TextField", 20));
+		contactsTab.add(new JTextField("", 20));
 		contactsTab.add(new JButton("Add a contact"));
 
 		//Create the university resources tab
@@ -31,7 +34,7 @@ public class PersonalInformationManagerGUI {
 		JPanel notesTab = new JPanel();
 		notesTab.add(new JButton("Add a note"));
 
-		
+		//Add all the tabs to our main window pane
 		tabbedPane.addTab(CALENDARTAB, calendarTab);
 		tabbedPane.addTab(CONTACTSTAB, contactsTab);
 		tabbedPane.addTab(UNIVERSITYRESOURCESTAB, universityResourcesTab);
@@ -51,7 +54,7 @@ public class PersonalInformationManagerGUI {
 
 		//Set the dimensions of the window
 		//TODO: add the ability to scale the window based on screen size
-		frame.setPreferredSize(new Dimension(1000, 300));
+		frame.setPreferredSize(new Dimension(1000, 500));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		//Create and set up the content pane.
@@ -64,10 +67,8 @@ public class PersonalInformationManagerGUI {
 	}
 
 	public static void main(String[] args) {
-		/* Use an appropriate Look and Feel */
 		try {
-			// Uncomment depending on operating system, Linux people use GTK
-			//UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+			// For Linux:GTKLookAndFeel, Windows:WindowsLookAndFeel, OSX:???
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
 		} catch (UnsupportedLookAndFeelException ex) {
 			ex.printStackTrace();
