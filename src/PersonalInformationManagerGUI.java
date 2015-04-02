@@ -55,7 +55,7 @@ public class PersonalInformationManagerGUI extends QuoteOfTheDay {
 
 		// Get the quote of the day and make it appear in pop up window dialog
 		QuoteOfTheDay quoteOfTheDay = new QuoteOfTheDay();
-		JOptionPane.showMessageDialog(frame, quoteOfTheDay.getQuoteOfTheDay() + ' ' + quoteOfTheDay.getAuthor());
+		JOptionPane.showMessageDialog(frame, quoteOfTheDay.getQuoteOfTheDay() + ' ' + quoteOfTheDay.getAuthor(), "QuoteOfTheDay", JOptionPane.PLAIN_MESSAGE);
 			
 		//Set the dimensions of the window
 		//TODO: add the ability to scale the window based on screen size
