@@ -12,10 +12,13 @@ there that explain it far better than I ever could. But the below is intended as
 
         git clone https://github.com/Liefdrag/PIMGROUP6.git 
         
+        
+- For those of you using eclipse / another IDE of choice I highly suggest that you clone this repository and 
+then drag those files into your Eclipse workspace. **make sure you move the hidden .git file as this is vital**
+        
 - By default git has a single branch 'master' where code can be added, but having multiple people pushing code to master
 can be confusing so I suggest each member makes a new branch for each feature they are working on
-
-        
+ 
         git branch <desired name of branch>
         
 e.g. if you're working on the notes section of the application you'd make new branch with the following
@@ -25,6 +28,7 @@ e.g. if you're working on the notes section of the application you'd make new br
 - To move to this branch run the following
 
         git checkout <name of your branch> 
+        
 in our above 'notes' example you'd run
  
         git checkout notes
@@ -33,6 +37,8 @@ you can actually create a branch and move to the new branch with the same comman
 
         git checkout -b <name of your branch>
        
+Nice visual example of how brancing works
+![Basic github branching](http://hades.name/media/git/git-history.png)       
 ---
 
 - Once you've coded in your feature you can tell git
@@ -63,8 +69,6 @@ following our above examples
         git push origin notes
 
 # Side Notes
-- For those of you using eclipse (Assuming this is everyone) I highly suggest that you git clone this repository and 
-then drag those files into your Eclipse workspace
 - When pushing code to github don't be lazy and run 'git add -all or git add *' as this will add unncessary eclipse 
 files like .classpath or /bin folders which can differ depending on OS or IDE of choice, only add what is necessary
 
