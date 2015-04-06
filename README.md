@@ -45,6 +45,7 @@ More information on branching can be found here http://git-scm.com/book/en/v2/Gi
 Nice visual example of how brancing works
 ![Basic github branching](http://hades.name/media/git/git-history.png)       
 ---
+
 ###Keeping Up To Date With Changes
 - At any time you can download any changes made to the branch you are currently on with the following command. You should
 make sure you do this when you sit down to add changes to any files on a branch, as the bug you wanted to fix could 
