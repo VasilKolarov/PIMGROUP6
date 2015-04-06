@@ -14,11 +14,11 @@ files like .classpath or /bin folders which can differ depending on OS or IDE of
 
 --- 
 
+# Adding libraries to build path
 Some of the features included in the project requires external libraries to function properly, there's no point writing
 all the code from scratch when libraries exist already
 
-# Adding libraries to your project
-There are a number of libraries stored in the /libs folder that you'll need to manual add to your build path. I highly
+All the necessary libraries are stored in the /libs folder however you'll need to manually add to your build path. I highly
 suggest you use an IDE to do this as doing it via command line can be a pain in the arse
 
 - For Eclipse users: http://www.wikihow.com/Add-JARs-to-Project-Build-Paths-in-Eclipse-(Java) 
