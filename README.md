@@ -8,6 +8,7 @@ https://www.youtube.com/watch?v=oFYyTZwMyAg
 I'm not going to go into detail about how to use Github, there are millions of youtube videos / online resources out 
 there that explain it far better than I ever could. But the below is intended as a very basic getting started guide
 
+###Cloning the Repository
 - First you need to clone the repository with 
 
         git clone https://github.com/Liefdrag/PIMGROUP6.git 
@@ -15,11 +16,13 @@ there that explain it far better than I ever could. But the below is intended as
         
 - For those of you using eclipse / another IDE of choice I highly suggest that you clone this repository and 
 then drag those files into your Eclipse workspace. **make sure you move the hidden .git file as this is vital**
-        
+  
+###Creating a branch
 - By default git has a single branch 'master' where code can be added, but having multiple people pushing code to master
 can be confusing so I suggest each member makes a new branch for each feature they are working on
  
         git branch <desired name of branch>
+
         
 e.g. if you're working on the notes section of the application you'd make new branch with the following
 
@@ -36,19 +39,31 @@ in our above 'notes' example you'd run
 you can actually create a branch and move to the new branch with the same command with the following
 
         git checkout -b <name of your branch>
-       
+      
+More information on branching can be found here http://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging 
+
 Nice visual example of how brancing works
 ![Basic github branching](http://hades.name/media/git/git-history.png)       
 ---
+###Keeping Up To Date With Changes
+- At any time you can download any changes made to the branch you are currently on with the following command. You should
+make sure you do this when you sit down to add changes to any files on a branch, as the bug you wanted to fix could 
+have been already fixed by someone else
 
-- Once you've coded in your feature you can tell git
-to track new changes with the following
+        git pull
+
+- Once you've coded in your feature you can tell git to track new changes with the following
 
         git add <name of your file>
         
-e.g. If you've created a new file called UnitTest.java you can run
+e.g. If you've created a file with a bunch of tests called UnitTest.java you can run
 
         git add UnitTest.java
+ 
+  
+- Sidenote: when adding files don't be lazy and run 'git add -all or git add *' in your root project directory as this 
+will add unnecessary eclipse files like .classpath or /bin folders which can differ depending on OS or IDE of choice, 
+only add what is necessary
   
 ---
 
@@ -68,12 +83,18 @@ following our above examples
 
         git push origin notes
 
-# Side Notes
-- When pushing code to github don't be lazy and run 'git add -all or git add *' as this will add unncessary eclipse 
-files like .classpath or /bin folders which can differ depending on OS or IDE of choice, only add what is necessary
-
-
 --- 
+
+- In order to merge your feature into the master branch (assuming everything works) do the following
+    - Move back to your local master branch and pull any changes from the upstream repository. Files could have changed
+    whilst you were busy working on your feature
+    
+        **Proceed with caution if in doubt ask Jack**
+
+        git checkout master
+        git pull
+        git merge <name of your branch>
+
 
 # Adding libraries to build path
 Some of the features included in the project requires external libraries to function properly, there's no point writing
