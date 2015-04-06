@@ -1,22 +1,32 @@
-# PIMGROUP6 Personal Information Manager
-
-Please excuse my filthy commit messages
-
 # How Do I Use Github
 To learn the basic workflow watch this video
 https://www.youtube.com/watch?v=oFYyTZwMyAg
 
 # How to contribute
-- For those of you using eclipse (Assumung this is everyone) I highly suggest
-that you git clone this repository and then drag that file into your Eclipse 
-workspace
-- If you want to add a feature, make a seperate branch, don't alter any of the
-  code in master
+- For those of you using eclipse (Assumung this is everyone) I highly suggest that you git clone this repository and 
+then drag those files into your Eclipse workspace
+- When pushing code to github don't be lazy and run 'git add -all or git add *' as this will add unncessary eclipse 
+files like .classpath or /bin folders which can differ depending on OS or IDE of choice, only add what is necessary
+- If you want to add a feature, make a separate branch, try not to alter any code in master
 - Write the code required for that new feature
 - Then merge back to master
 
 
 --- 
+
+Some of the features included in the project requires external libraries to function properly, there's no point writing
+all the code from scratch when libraries exist already
+
+# Adding libraries in Eclipse
+There are a number of libraries stored in the /libs folder, you'll need to manually add them to your build path
+in eclipse, to do so follow these instructions http://www.wikihow.com/Add-JARs-to-Project-Build-Paths-in-Eclipse-(Java) 
+
+# Adding libraries in IntelliJ
+For anyone using IntelliJ (because it's objectively x100 better than eclipse) to add libraries follow any of these instructions
+- https://www.jetbrains.com/idea/help/configuring-module-dependencies-and-libraries.html 
+- http://stackoverflow.com/questions/1051640/correct-way-to-add-lib-jar-to-an-intellij-idea-project 
+
+---
 
 # Setting up mysql and the database
 
@@ -24,6 +34,7 @@ workspace
 - first you need to make sure you have mysql installed
     - Linux (ubuntu people (Vasil + Tommy ? )) I followed these instructions here https://help.ubuntu.com/community/JDBCAndMySQL
     - Windows/Mac people I have no clue sorry
+
 
 ~~##Creating the Database~~ 
 
@@ -53,5 +64,3 @@ automatically, use instructions below as a fail safe if this doesn't work
 - Exit the mysql shell then run the data base population scripts with
 
             mysql --user=root --password=root PIMDataBase < PopulateDBWithTestData.sql
-            
-- In feature updates I'll make it so the populate database function works from within Java itself
