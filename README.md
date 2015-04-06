@@ -1,10 +1,13 @@
 # How Do I Use Github
 - I understand not everyone knows how to use Github / version control but it's a skill worth learning and easy to get 
 the hang of
-- To learn the basic workflow I highly recommend you watch this video
+- To learn the basic workflow I **highly recommend you watch this video**
 https://www.youtube.com/watch?v=oFYyTZwMyAg
 
-# Adding code to the project
+## Some really basic Github Instructions
+I'm not going to go into detail about how to use Github, there are millions of youtube videos / online resources out 
+there that explain it far better than I ever could. But the below is intended as a very basic getting started guide
+
 - First you need to clone the repository with 
 
         git clone https://github.com/Liefdrag/PIMGROUP6.git 
