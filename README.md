@@ -52,6 +52,7 @@ have been already fixed by someone else
 
         git pull
 
+###Adding Your Own Files
 - Once you've coded in your feature you can tell git to track new changes with the following
 
         git add <name of your file>
@@ -66,7 +67,7 @@ will add unnecessary eclipse files like .classpath or /bin folders which can dif
 only add what is necessary
   
 ---
-
+###Uploading Your Changes
 - You then need to add a commit message to tell other members of the group what changes you made, try to make commit 
 messages usefull so other members know whats going on
 
@@ -84,7 +85,7 @@ following our above examples
         git push origin notes
 
 --- 
-
+###Merging Your Feature (proceed with caution)
 - In order to merge your feature into the master branch (assuming everything works) do the following
     - Move back to your local master branch and pull any changes from the upstream repository. Files could have changed
     whilst you were busy working on your feature
