@@ -17,14 +17,15 @@ files like .classpath or /bin folders which can differ depending on OS or IDE of
 Some of the features included in the project requires external libraries to function properly, there's no point writing
 all the code from scratch when libraries exist already
 
-# Adding libraries in Eclipse
-There are a number of libraries stored in the /libs folder, you'll need to manually add them to your build path
-in eclipse, to do so follow these instructions http://www.wikihow.com/Add-JARs-to-Project-Build-Paths-in-Eclipse-(Java) 
+# Adding libraries to your project
+There are a number of libraries stored in the /libs folder that you'll need to manual add to your build path. I highly
+suggest you use an IDE to do this as doing it via command line can be a pain in the arse
 
-# Adding libraries in IntelliJ
-For anyone using IntelliJ (because it's objectively x100 better than eclipse) to add libraries follow any of these instructions
-- https://www.jetbrains.com/idea/help/configuring-module-dependencies-and-libraries.html 
-- http://stackoverflow.com/questions/1051640/correct-way-to-add-lib-jar-to-an-intellij-idea-project 
+- For Eclipse users: http://www.wikihow.com/Add-JARs-to-Project-Build-Paths-in-Eclipse-(Java) 
+
+- For IntelliJ users (because it's x1000 times better than Eclipse) follow either:
+    - https://www.jetbrains.com/idea/help/configuring-module-dependencies-and-libraries.html 
+    - http://stackoverflow.com/questions/1051640/correct-way-to-add-lib-jar-to-an-intellij-idea-project 
 
 ---
 
