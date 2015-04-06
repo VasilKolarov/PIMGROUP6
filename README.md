@@ -1,15 +1,69 @@
 # How Do I Use Github
-To learn the basic workflow watch this video
+- I understand not everyone knows how to use Github / version control but it's a skill worth learning and easy to get 
+the hang of
+- To learn the basic workflow I highly recommend you watch this video
 https://www.youtube.com/watch?v=oFYyTZwMyAg
 
-# How to contribute
-- For those of you using eclipse (Assumung this is everyone) I highly suggest that you git clone this repository and 
+# Adding code to the project
+- First you need to clone the repository with 
+
+        git clone https://github.com/Liefdrag/PIMGROUP6.git 
+        
+- By default git has a single branch 'master' where code can be added, but having multiple people pushing code to master
+can be confusing so I suggest each member makes a new branch for each feature they are working on
+
+        
+        git branch <desired name of branch>
+        
+e.g. if you're working on the notes section of the application you'd make new branch with the following
+
+        git branch notes
+
+- To move to this branch run the following
+
+        git checkout <name of your branch> 
+in our above 'notes' example you'd run
+ 
+        git checkout notes
+        
+you can actually create a branch and move to the new branch with the same command with the following
+
+        git checkout -b <name of your branch>
+       
+---
+
+- Once you've coded in your feature you can tell git
+to track new changes with the following
+
+        git add <name of your file>
+        
+e.g. If you've created a new file called UnitTest.java you can run
+
+        git add UnitTest.java
+  
+---
+
+- You then need to add a commit message to tell other members of the group what changes you made, try to make commit 
+messages usefull so other members know whats going on
+
+        git commit -m "<Details of what changes to made here>"
+
+---
+
+- Once you've added files to your local branch you need to push these files to remote upstream repository on github, 
+this can be done with the following
+
+        git push origin <name of your branch>
+
+following our above examples
+
+        git push origin notes
+
+# Side Notes
+- For those of you using eclipse (Assuming this is everyone) I highly suggest that you git clone this repository and 
 then drag those files into your Eclipse workspace
 - When pushing code to github don't be lazy and run 'git add -all or git add *' as this will add unncessary eclipse 
 files like .classpath or /bin folders which can differ depending on OS or IDE of choice, only add what is necessary
-- If you want to add a feature, make a separate branch, try not to alter any code in master
-- Write the code required for that new feature
-- Then merge back to master
 
 
 --- 
