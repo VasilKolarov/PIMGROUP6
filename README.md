@@ -18,7 +18,7 @@ files like .classpath or /bin folders which can differ depending on OS or IDE of
 Some of the features included in the project requires external libraries to function properly, there's no point writing
 all the code from scratch when libraries exist already
 
-All the necessary libraries are stored in the /libs folder however you'll need to manually add to your build path. I highly
+All the necessary libraries are stored in the /libs folder, but you'll need to manually add them to your build path. I highly
 suggest you use an IDE to do this as doing it via command line can be a pain in the arse
 
 - For Eclipse users: http://www.wikihow.com/Add-JARs-to-Project-Build-Paths-in-Eclipse-(Java) 
@@ -29,20 +29,24 @@ suggest you use an IDE to do this as doing it via command line can be a pain in 
 
 ---
 
-# Setting up mysql and the database
+# Setting up JDBC and Mysql
+All user information from the Personal Information Manager such as contacts, notes and appointements will be stored 
+in a simple database. We're going to use JDBC to connect Java to a simple MySql database
 
-##Installation msql
-- first you need to make sure you have mysql installed
-    - Linux (ubuntu people (Vasil + Tommy ? )) I followed these instructions here https://help.ubuntu.com/community/JDBCAndMySQL
-    - Windows/Mac people I have no clue sorry
+##Installing MySql
+- Linux (ubuntu people (Vasil + Tommy ? )) I followed these instructions here https://help.ubuntu.com/community/JDBCAndMySQL
+- Windows people follow these instructions  http://dev.mysql.com/doc/refman/5.7/en/windows-installation.html 
+- OSX people, ask Steve Jobs
 
+##Using MySql##
+Although the java code automatically creates the database if it does't already exits you may need to jump into the MySql
+shell do debug any errors and check everything is running fine
 
-~~##Creating the Database~~ 
+Comprehensive instructions on using the MySql shell can be found here: http://www.tutorialspoint.com/jdbc/jdbc-sql-syntax.htm 
 
-No longer necessary since ConnectToDataBase.java will create once
-automatically, use instructions below as a fail safe if this doesn't work
+##Useful MySql Commands 
 
-- From the temrinal/command line access the mysql shell/prompt by running
+- From the temrinal/command line you can access the mysql shell/prompt by running
             
             mysql -u root -p
 
@@ -60,6 +64,10 @@ automatically, use instructions below as a fail safe if this doesn't work
             SHOW DATABASES;
 
 - You should be able to see PIMDataBase in the table
+
+- To remove the Database you can run the following command
+            
+            DROP DATABASE PIMDataBase;
 
 ##Populating the Database
 - Exit the mysql shell then run the data base population scripts with
