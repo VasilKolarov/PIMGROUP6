@@ -8,10 +8,31 @@ import java.sql.SQLException;
  * @author	Jack Evans
  */
 public class PersonalInformationManagerGUI {
-	final static String CALENDARTAB = "Calendar";
+	final static String APPOINTEMENTSTAB = "Appointments";
 	final static String CONTACTSTAB = "Contacts";
 	final static String UNIVERSITYRESOURCESTAB = "University Resources";
 	final static String NOTESTAB = "Notes";
+
+	static DataBaseConnection dataBaseConncetion = new DataBaseConnection();
+
+	public static void main(String[] args) {
+		// Establish a connection to the DataBase
+		dataBaseConncetion.makeConnection();
+		try {
+			// For Linux:GTKLookAndFeel, Windows:WindowsLookAndFeel, OSX:???
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+		} catch (UnsupportedLookAndFeelException | IllegalAccessException | ClassNotFoundException | InstantiationException ex) {
+			ex.printStackTrace();
+		}
+
+		//Schedule a job for the event dispatch thread:
+		//creating and showing this application's GUI.
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				createAndShowGUI();
+			}
+		});
+	}
 
 	/**
 	 * Create various components and add them to the main window pane
@@ -20,13 +41,16 @@ public class PersonalInformationManagerGUI {
 		JTabbedPane tabbedPane = new JTabbedPane();
 
 		//Create the calendar tab
-		JPanel calendarTab = new JPanel();
-		calendarTab.add(new JButton("Add an appointment"));
+		JPanel appoinmentsTab = new JPanel();
+		fetchAppointmentsData(appoinmentsTab);
 
 		//Create the contacts tab
 		JPanel contactsTab = new JPanel();
-		contactsTab.add(new JTextField("", 20));
-		contactsTab.add(new JButton("Add a contact"));
+		fetchContactsData(contactsTab);
+
+		//Create the notes tab
+		JPanel notesTab = new JPanel();
+		fetchNotesData(notesTab);
 
 		//Create the university resources tab
 		JPanel universityResourcesTab = new JPanel();
@@ -34,12 +58,9 @@ public class PersonalInformationManagerGUI {
 		universityResourcesTab.add(new JButton("View Univeristy website"));
 		universityResourcesTab.add(new JButton("View University news"));
 
-		//Create the university resources tab
-		JPanel notesTab = new JPanel();
-		notesTab.add(new JButton("Add a note"));
 
 		//Add all the tabs to our main window pane
-		tabbedPane.addTab(CALENDARTAB, calendarTab);
+		tabbedPane.addTab(APPOINTEMENTSTAB, appoinmentsTab);
 		tabbedPane.addTab(CONTACTSTAB, contactsTab);
 		tabbedPane.addTab(UNIVERSITYRESOURCESTAB, universityResourcesTab);
 		tabbedPane.addTab(NOTESTAB, notesTab);
@@ -72,12 +93,11 @@ public class PersonalInformationManagerGUI {
 		frame.pack();
 		frame.setVisible(true);
 	}
-	public static void main(String[] args) {
 
-		// Establish a connection to the DataBase
-		DataBaseConnection dataBaseConncetion = new DataBaseConnection();
-		dataBaseConncetion.makeConnection();
-
+	/**
+	 *  Method to fetch and display Contact information
+	 */
+	public void fetchContactsData(JPanel contactsTab) {
 		try {
 			ResultSet results = dataBaseConncetion.getTableData("CONTACTS");
 			while (results.next()) {
@@ -87,29 +107,54 @@ public class PersonalInformationManagerGUI {
 				String phone = results.getString("CONTACT_PHONE");
 				String email = results.getString("CONTACT_EMAIL");
 
-				System.out.println("forename: " + forename + " surname : " + surname);
-				System.out.println("phone: " + phone + " email : " + email + "\n");
-
+				contactsTab.add(new JTextField("Forename " + forename, 20));
+				contactsTab.add(new JTextField("Surname " + surname, 20));
+				contactsTab.add(new JTextField("Phone " + phone, 20));
+				contactsTab.add(new JTextField("Email " + email, 20));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
 
-//
-//		try {
-//			// For Linux:GTKLookAndFeel, Windows:WindowsLookAndFeel, OSX:???
-//			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
-//		} catch (UnsupportedLookAndFeelException | IllegalAccessException | ClassNotFoundException | InstantiationException ex) {
-//			ex.printStackTrace();
-//		}
-//
-//
-//		//Schedule a job for the event dispatch thread:
-//		//creating and showing this application's GUI.
-//		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-//			public void run() {
-//				createAndShowGUI();
-//			}
-//		});
+	/**
+	 *  Method to fetch and display Appointment information
+	 */
+	public void fetchAppointmentsData(JPanel appoinmentsTab) {
+		try {
+			ResultSet results = dataBaseConncetion.getTableData("APPOINTMENTS");
+			while (results.next()) {
+				String title = results.getString("APPOINTMENT_TITLE");
+				String category = results.getString("APPOINTMENT_CATEGORY");
+				String description = results.getString("APPOINTMENT_DESCRIPTION");
+				String location = results.getString("APPOINTMENT_LOCATION");
+
+				appoinmentsTab.add(new JTextField("Title " + title, 20));
+				appoinmentsTab.add(new JTextField("Category " + category, 20));
+				appoinmentsTab.add(new JTextField("Description " + description, 20));
+				appoinmentsTab.add(new JTextField("Location " + location, 20));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 *  Method to fetch and display note information
+	 */
+	private void fetchNotesData(JPanel notesTab) {
+		try {
+			ResultSet results = dataBaseConncetion.getTableData("NOTES");
+			while (results.next()) {
+				String title = results.getString("NOTE_TITLE");
+				String content = results.getString("NOTE_CONTENT");
+
+				notesTab.add(new JTextField("Title " + title, 20));
+				notesTab.add(new JTextField("Content " + content, 20));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -51,7 +51,7 @@ public class DataBaseConnection {
             PIMConnection = DriverManager.getConnection(PIMDB_URL, USER, PASS);
             System.out.println("Connected to Database");
 
-			// Ask user if they want to populate the Database with test data
+			//TODO only ask users to run the population script if the Databse is empty
 			populateDataBase();
 
 		} catch (SQLException | ClassNotFoundException e) {
