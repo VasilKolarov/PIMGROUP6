@@ -35,7 +35,7 @@ public class PersonalInformationManagerGUI {
 	}
 
 	/**
-	 * Create various components and add them to the main window pane
+	 * Adds each main app feature as a tab across the top of the application
 	 */
 	public void addComponentToPane(Container pane) {
 		JTabbedPane tabbedPane = new JTabbedPane();
@@ -47,7 +47,7 @@ public class PersonalInformationManagerGUI {
 	}
 
 	/**
-	 * Create the GUI and show it.  For thread safety,
+	 * Create the GUI and show it. For thread safety,
 	 * this method should be invoked from the
 	 * event dispatch thread.
 	 */
@@ -139,18 +139,21 @@ public class PersonalInformationManagerGUI {
 	 */
 	public void buildNotesPanel(JTabbedPane tabbedPane) {
 		JPanel notesPanel = new JPanel();
+		GridLayout layout = new GridLayout(0,1);
+      	layout.setHgap(10);
+      	layout.setVgap(10);
+		notesPanel.setLayout(layout);
 		try {
 			ResultSet results = dataBaseConncetion.getTableData("NOTES");
 			while (results.next()) {
-				notesPanel.add(new JLabel(results.getString("NOTE_TITLE")));
-				notesPanel.add(new JTextField(results.getString("NOTE_CONTENT")));
-
+				notesPanel.add(new JTextArea(results.getString("NOTE_TITLE")));
+				notesPanel.add(new JTextArea(results.getString("NOTE_CONTENT")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		JScrollPane notesPane = new JScrollPane(notesPanel);
-		notesPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		notesPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		notesPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		notesPane.setBounds(50, 30, 300, 50);
 		tabbedPane.addTab(NOTESTAB, notesPane);
