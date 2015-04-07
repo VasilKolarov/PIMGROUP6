@@ -20,8 +20,8 @@ public class DataBaseConnection {
 	// Change this to whatever you had on your local machines
 	private static final String USER = "root";
 	private static final String PASS = "root";
-	Connection MysqlConnection = null;
-	Connection PIMConnection = null;
+	public Connection MysqlConnection = null;
+	public Connection PIMConnection = null;
 
 	/**
 	 * Connects Java to the MySql Databsae
@@ -45,13 +45,14 @@ public class DataBaseConnection {
 			// If the database doesn't exist locally then we need to create it
 			if (!DBExists) {
 				createDataBase();
-
-				// Populate the database with test data
-				populateDataBase();
 			}
-			// Connect to the new Database
-			PIMConnection = DriverManager.getConnection(PIMDB_URL, USER, PASS);
-			System.out.println("Connected to Database");
+
+            // Connect to the new Database
+            PIMConnection = DriverManager.getConnection(PIMDB_URL, USER, PASS);
+            System.out.println("Connected to Database");
+
+			// Ask user if they want to populate the Database with test data
+			populateDataBase();
 
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
@@ -96,26 +97,21 @@ public class DataBaseConnection {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Run population script [Y/n]?");
 		String a = input.next();
-		if(a.equalsIgnoreCase("y")) {
-			try {
-				PIMConnection = DriverManager.getConnection(PIMDB_URL, USER, PASS);
+		if (a.equalsIgnoreCase("y")) {
 
-				// Create the Database tables by running an sql script
-				String currentDir = System.getProperty("user.dir");
-				String populationScript = currentDir + "/PopulateDBWithTestData.sql";
+			// Create the Database tables by running an sql script
+			String currentDir = System.getProperty("user.dir");
+			String populationScript = currentDir + "/PopulateDBWithTestData.sql";
 
-				// Initialise object for ScripRunner
-				ScriptRunner sr = new ScriptRunner(PIMConnection);
+			// Initialise object for ScripRunner
+			ScriptRunner sr = new ScriptRunner(PIMConnection);
 
-				// Give the input file to Reader
-				try (Reader reader = new BufferedReader(new FileReader(populationScript))) {
-					// Execute the script to populate the DataBase
-					sr.runScript(reader);
-				} catch (IOException e) {
-					System.out.println("Unable to execute populate script");
-				}
-			} catch (SQLException e) {
-				System.out.println("Unable to connect to the Database");
+			// Give the input file to Reader
+			try (Reader reader = new BufferedReader(new FileReader(populationScript))) {
+				// Execute the script to populate the DataBase
+				sr.runScript(reader);
+			} catch (IOException e) {
+				System.out.println("Unable to execute populate script");
 			}
 		} else System.out.println("Population script was not run");
 	}
@@ -123,7 +119,14 @@ public class DataBaseConnection {
 	/**
 	 * Returns a results set of all the rows form a given table
 	 */
-	public void getTableData(String table) {
-		System.out.println("This is awesome" + table);
+	public ResultSet getTableData(String tableName) {
+		try {
+			Statement stmt = PIMConnection.createStatement();
+			return stmt.executeQuery("SELECT * FROM " + tableName);
+		} catch (SQLException e) {
+			System.out.println("Unable to connect to Database");
+			return null;
+		}
+
 	}
 }

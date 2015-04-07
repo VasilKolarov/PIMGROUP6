@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Main class to draw the windows for the Personal Information Manager Application
@@ -75,6 +77,24 @@ public class PersonalInformationManagerGUI {
 		// Establish a connection to the DataBase
 		DataBaseConnection dataBaseConncetion = new DataBaseConnection();
 		dataBaseConncetion.makeConnection();
+
+		try {
+			ResultSet results = dataBaseConncetion.getTableData("CONTACTS");
+			while (results.next()) {
+				int id = results.getInt("CONTACT_ID");
+				String forename = results.getString("CONTACT_FORENAME");
+				String surname = results.getString("CONTACT_SURNAME");
+				String phone = results.getString("CONTACT_PHONE");
+				String email = results.getString("CONTACT_EMAIL");
+
+				System.out.println("forename: " + forename + " surname : " + surname);
+				System.out.println("phone: " + phone + " email : " + email + "\n");
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 //
 //		try {
 //			// For Linux:GTKLookAndFeel, Windows:WindowsLookAndFeel, OSX:???
