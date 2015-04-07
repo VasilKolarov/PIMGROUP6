@@ -39,32 +39,10 @@ public class PersonalInformationManagerGUI {
 	 */
 	public void addComponentToPane(Container pane) {
 		JTabbedPane tabbedPane = new JTabbedPane();
-
-		//Create the calendar tab
-		JPanel appoinmentsTab = new JPanel();
-		fetchAppointmentsData(appoinmentsTab);
-
-		//Create the contacts tab
-		JPanel contactsTab = new JPanel();
-		fetchContactsData(contactsTab);
-
-		//Create the notes tab
-		JPanel notesTab = new JPanel();
-		fetchNotesData(notesTab);
-
-		//Create the university resources tab
-		JPanel universityResourcesTab = new JPanel();
-		universityResourcesTab.add(new JButton("View campus map"));
-		universityResourcesTab.add(new JButton("View Univeristy website"));
-		universityResourcesTab.add(new JButton("View University news"));
-
-
-		//Add all the tabs to our main window pane
-		tabbedPane.addTab(APPOINTEMENTSTAB, appoinmentsTab);
-		tabbedPane.addTab(CONTACTSTAB, contactsTab);
-		tabbedPane.addTab(UNIVERSITYRESOURCESTAB, universityResourcesTab);
-		tabbedPane.addTab(NOTESTAB, notesTab);
-
+		buildNotesPanel(tabbedPane);
+		buildContactsPanel(tabbedPane);
+		buildAppointmentsPanel(tabbedPane);
+		buildUniversityResourcesPanel(tabbedPane);
 		pane.add(tabbedPane, BorderLayout.CENTER);
 	}
 
@@ -95,75 +73,95 @@ public class PersonalInformationManagerGUI {
 	}
 
 	/**
-	 *  Method to fetch and display Contact information
+	 *  Method to fetch contacts data and build contacts panel
 	 */
-	public void fetchContactsData(JPanel contactsTab) {
+	public void buildContactsPanel(JTabbedPane tabbedPane) {
+		JPanel contactsPanel = new JPanel();
 		try {
 			ResultSet results = dataBaseConncetion.getTableData("CONTACTS");
 			while (results.next()) {
-				contactsTab.setLayout(new GridLayout(0, 2));
+				contactsPanel.add(new JLabel("Forename: "));
+				contactsPanel.add(new JTextField(results.getString("CONTACT_FORENAME")));
 
-				contactsTab.add(new JLabel("Forename: "));
-				contactsTab.add(new JTextField(results.getString("CONTACT_FORENAME")));
+				contactsPanel.add(new JLabel("Surname: "));
+				contactsPanel.add(new JTextField(results.getString("CONTACT_SURNAME")));
 
-				contactsTab.add(new JLabel("Surname: "));
-				contactsTab.add(new JTextField(results.getString("CONTACT_SURNAME")));
+				contactsPanel.add(new JLabel("Phone Number: "));
+				contactsPanel.add(new JTextField(results.getString("CONTACT_PHONE")));
 
-				contactsTab.add(new JLabel("Phone Number: "));
-				contactsTab.add(new JTextField(results.getString("CONTACT_PHONE")));
-
-				contactsTab.add(new JLabel("Email: "));
-				contactsTab.add(new JTextField(results.getString("CONTACT_EMAIL")));
+				contactsPanel.add(new JLabel("Email: "));
+				contactsPanel.add(new JTextField(results.getString("CONTACT_EMAIL")));
 			}
+			tabbedPane.addTab(CONTACTSTAB, contactsPanel);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		JScrollPane contactPane = new JScrollPane(contactsPanel);
+		contactPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		contactPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		contactPane.setBounds(50, 30, 300, 50);
+		tabbedPane.addTab(NOTESTAB, contactPane);
 	}
 
 	/**
-	 *  Method to fetch and display Appointment information
+	 *  Method to fetch appointment data and build appointment panel
 	 */
-	public void fetchAppointmentsData(JPanel appoinmentsTab) {
+	public void buildAppointmentsPanel(JTabbedPane tabbedPane) {
+		JPanel appointmentsPanel = new JPanel();
 		try {
 			ResultSet results = dataBaseConncetion.getTableData("APPOINTMENTS");
 			while (results.next()) {
+				appointmentsPanel.add(new JLabel("Appointment: "));
+				appointmentsPanel.add(new JTextField(results.getString("APPOINTMENT_TITLE")));
 
-				appoinmentsTab.setLayout(new GridLayout(0, 2));
+				appointmentsPanel.add(new JLabel("Category: "));
+				appointmentsPanel.add(new JTextField(results.getString("APPOINTMENT_CATEGORY")));
 
-				appoinmentsTab.add(new JLabel("Appointment: "));
-				appoinmentsTab.add(new JTextField(results.getString("APPOINTMENT_TITLE")));
+				appointmentsPanel.add(new JLabel("Description: "));
+				appointmentsPanel.add(new JTextField(results.getString("APPOINTMENT_DESCRIPTION")));
 
-				appoinmentsTab.add(new JLabel("Category: "));
-				appoinmentsTab.add(new JTextField(results.getString("APPOINTMENT_CATEGORY")));
-
-				appoinmentsTab.add(new JLabel("Description: "));
-				appoinmentsTab.add(new JTextField(results.getString("APPOINTMENT_DESCRIPTION")));
-
-				appoinmentsTab.add(new JLabel("Location: "));
-				appoinmentsTab.add(new JTextField(results.getString("APPOINTMENT_LOCATION")));
+				appointmentsPanel.add(new JLabel("Location: "));
+				appointmentsPanel.add(new JTextField(results.getString("APPOINTMENT_LOCATION")));
 			}
-
+			tabbedPane.addTab(APPOINTEMENTSTAB, appointmentsPanel);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		JScrollPane appointmentPane = new JScrollPane(appointmentsPanel);
+		appointmentPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		appointmentPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		appointmentPane.setBounds(50, 30, 300, 50);
+		tabbedPane.addTab(NOTESTAB, appointmentPane);
 	}
 
 	/**
-	 *  Method to fetch and display note information
+	 *  Method to fetch notes data and build notes panel
 	 */
-	private void fetchNotesData(JPanel notesTab) {
+	public void buildNotesPanel(JTabbedPane tabbedPane) {
+		JPanel notesPanel = new JPanel();
 		try {
 			ResultSet results = dataBaseConncetion.getTableData("NOTES");
 			while (results.next()) {
-
-				notesTab.setLayout(new GridLayout(0, 1));
-
-				notesTab.add(new JLabel(results.getString("NOTE_TITLE")));
-				notesTab.add(new JTextField(results.getString("NOTE_CONTENT")));
+				notesPanel.add(new JLabel(results.getString("NOTE_TITLE")));
+				notesPanel.add(new JTextField(results.getString("NOTE_CONTENT")));
 
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		JScrollPane notesPane = new JScrollPane(notesPanel);
+		notesPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		notesPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		notesPane.setBounds(50, 30, 300, 50);
+		tabbedPane.addTab(NOTESTAB, notesPane);
+	}
+
+	/**
+	 * Method to build University Resources panel
+	 */
+	public void buildUniversityResourcesPanel(JTabbedPane tabbedPane) {
+		JPanel universityResourcesTab = new JPanel();
+		universityResourcesTab.add(new JButton("Click me to make it rain $$$$"));
+		tabbedPane.addTab(UNIVERSITYRESOURCESTAB, universityResourcesTab);
 	}
 }
