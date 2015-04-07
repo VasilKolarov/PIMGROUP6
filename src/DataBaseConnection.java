@@ -7,6 +7,11 @@ import java.io.Reader;
 import java.sql.*;
 import java.util.Scanner;
 
+/**
+ * Connectivity layer between application and database to allow us to easily
+ * send data back and forth
+ * @author	Jack Evans
+ */
 public class DataBaseConnection {
 	// JDBC driver name and database URL
 	static final String DB_URL = "jdbc:mysql://localhost/";

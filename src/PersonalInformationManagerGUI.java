@@ -1,9 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class PersonalInformationManagerGUI extends QuoteOfTheDay {
-
-
+/**
+ * Main class to draw the windows for the Personal Information Manager Application
+ * @author	Jack Evans
+ */
+public class PersonalInformationManagerGUI {
 	final static String CALENDARTAB = "Calendar";
 	final static String CONTACTSTAB = "Contacts";
 	final static String UNIVERSITYRESOURCESTAB = "University Resources";
@@ -57,7 +59,6 @@ public class PersonalInformationManagerGUI extends QuoteOfTheDay {
 		JOptionPane.showMessageDialog(frame, quoteOfTheDay.getQuoteOfTheDay() + ' ' + quoteOfTheDay.getAuthor(), "QuoteOfTheDay", JOptionPane.PLAIN_MESSAGE);
 
 		//Set the dimensions of the window
-		//TODO: add the ability to scale the window based on screen size
 		frame.setPreferredSize(new Dimension(1000, 500));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -69,27 +70,26 @@ public class PersonalInformationManagerGUI extends QuoteOfTheDay {
 		frame.pack();
 		frame.setVisible(true);
 	}
-
 	public static void main(String[] args) {
-		try {
-			// For Linux:GTKLookAndFeel, Windows:WindowsLookAndFeel, OSX:???
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
-		} catch (UnsupportedLookAndFeelException ex) {
-			ex.printStackTrace();
-		} catch (IllegalAccessException ex) {
-			ex.printStackTrace();
-		} catch (InstantiationException ex) {
-			ex.printStackTrace();
-		} catch (ClassNotFoundException ex) {
-			ex.printStackTrace();
-		}
 
-		//Schedule a job for the event dispatch thread:
-		//creating and showing this application's GUI.
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				createAndShowGUI();
-			}
-		});
+		// Establish a connection to the DataBase
+		DataBaseConnection dataBaseConncetion = new DataBaseConnection();
+		dataBaseConncetion.makeConnection();
+//
+//		try {
+//			// For Linux:GTKLookAndFeel, Windows:WindowsLookAndFeel, OSX:???
+//			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+//		} catch (UnsupportedLookAndFeelException | IllegalAccessException | ClassNotFoundException | InstantiationException ex) {
+//			ex.printStackTrace();
+//		}
+//
+//
+//		//Schedule a job for the event dispatch thread:
+//		//creating and showing this application's GUI.
+//		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+//			public void run() {
+//				createAndShowGUI();
+//			}
+//		});
 	}
 }

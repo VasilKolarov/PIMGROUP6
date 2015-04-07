@@ -13,6 +13,7 @@ public class QuoteOfTheDay {
     // Initialise some variables
     public static String url = "http://www.eduro.com/";
     public static Document document;
+
     /**
      * @return The Quote of the Day
      */
@@ -26,7 +27,7 @@ public class QuoteOfTheDay {
     }
 
     /**
-     * @return The Author of todays quote
+     * @return The Author of today's quote
      */
     public String getAuthor() {
         try {
