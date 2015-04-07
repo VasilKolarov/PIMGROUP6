@@ -43,17 +43,18 @@ public class DataBaseConnection {
 			}
 			resultSet.close();
 			// If the database doesn't exist locally then we need to create it
-			if (!DBExists) {
-				createDataBase();
-			}
+			if (!DBExists) createDataBase();
 
             // Connect to the new Database
             PIMConnection = DriverManager.getConnection(PIMDB_URL, USER, PASS);
             System.out.println("Connected to Database");
 
-			//TODO only ask users to run the population script if the Databse is empty
-			populateDataBase();
-
+			// Detect is the Database is empty in order to fill in with test data
+			if (!getTableData("CONTACTS").next() && !getTableData("APPOINTMENTS").next() && !getTableData("NOTES").next()) {
+				System.out.println("Database is empty");
+				// Call method to populate Database with test data
+				populateDataBase();
+			}
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -127,6 +128,5 @@ public class DataBaseConnection {
 			System.out.println("Unable to connect to Database");
 			return null;
 		}
-
 	}
 }
