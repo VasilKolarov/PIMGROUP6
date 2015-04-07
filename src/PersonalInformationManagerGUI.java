@@ -101,16 +101,19 @@ public class PersonalInformationManagerGUI {
 		try {
 			ResultSet results = dataBaseConncetion.getTableData("CONTACTS");
 			while (results.next()) {
-				int id = results.getInt("CONTACT_ID");
-				String forename = results.getString("CONTACT_FORENAME");
-				String surname = results.getString("CONTACT_SURNAME");
-				String phone = results.getString("CONTACT_PHONE");
-				String email = results.getString("CONTACT_EMAIL");
+				contactsTab.setLayout(new GridLayout(0, 2));
 
-				contactsTab.add(new JTextField("Forename " + forename, 20));
-				contactsTab.add(new JTextField("Surname " + surname, 20));
-				contactsTab.add(new JTextField("Phone " + phone, 20));
-				contactsTab.add(new JTextField("Email " + email, 20));
+				contactsTab.add(new JLabel("Forename: "));
+				contactsTab.add(new JTextField(results.getString("CONTACT_FORENAME")));
+
+				contactsTab.add(new JLabel("Surname: "));
+				contactsTab.add(new JTextField(results.getString("CONTACT_SURNAME")));
+
+				contactsTab.add(new JLabel("Phone Number: "));
+				contactsTab.add(new JTextField(results.getString("CONTACT_PHONE")));
+
+				contactsTab.add(new JLabel("Email: "));
+				contactsTab.add(new JTextField(results.getString("CONTACT_EMAIL")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -124,15 +127,20 @@ public class PersonalInformationManagerGUI {
 		try {
 			ResultSet results = dataBaseConncetion.getTableData("APPOINTMENTS");
 			while (results.next()) {
-				String title = results.getString("APPOINTMENT_TITLE");
-				String category = results.getString("APPOINTMENT_CATEGORY");
-				String description = results.getString("APPOINTMENT_DESCRIPTION");
-				String location = results.getString("APPOINTMENT_LOCATION");
 
-				appoinmentsTab.add(new JTextField("Title " + title, 20));
-				appoinmentsTab.add(new JTextField("Category " + category, 20));
-				appoinmentsTab.add(new JTextField("Description " + description, 20));
-				appoinmentsTab.add(new JTextField("Location " + location, 20));
+				appoinmentsTab.setLayout(new GridLayout(0, 2));
+
+				appoinmentsTab.add(new JLabel("Appointment: "));
+				appoinmentsTab.add(new JTextField(results.getString("APPOINTMENT_TITLE")));
+
+				appoinmentsTab.add(new JLabel("Category: "));
+				appoinmentsTab.add(new JTextField(results.getString("APPOINTMENT_CATEGORY")));
+
+				appoinmentsTab.add(new JLabel("Description: "));
+				appoinmentsTab.add(new JTextField(results.getString("APPOINTMENT_DESCRIPTION")));
+
+				appoinmentsTab.add(new JLabel("Location: "));
+				appoinmentsTab.add(new JTextField(results.getString("APPOINTMENT_LOCATION")));
 			}
 
 		} catch (SQLException e) {
@@ -147,11 +155,12 @@ public class PersonalInformationManagerGUI {
 		try {
 			ResultSet results = dataBaseConncetion.getTableData("NOTES");
 			while (results.next()) {
-				String title = results.getString("NOTE_TITLE");
-				String content = results.getString("NOTE_CONTENT");
 
-				notesTab.add(new JTextField("Title " + title, 20));
-				notesTab.add(new JTextField("Content " + content, 20));
+				notesTab.setLayout(new GridLayout(0, 1));
+
+				notesTab.add(new JLabel(results.getString("NOTE_TITLE")));
+				notesTab.add(new JTextField(results.getString("NOTE_CONTENT")));
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
